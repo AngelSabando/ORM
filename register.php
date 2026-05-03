@@ -9,12 +9,14 @@ require_once 'config.php';
 $response = ['status' => 'error', 'message' => ''];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+    $name = trim($_POST['name'] ?? '');
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-    $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING);
-    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
-    $ruc = filter_input(INPUT_POST, 'ruc', FILTER_SANITIZE_STRING);
+    
+    $password = $_POST['password'] ?? ''; 
+    
+    $lastname = trim($_POST['lastname'] ?? '');
+    $username = trim($_POST['username'] ?? '');
+    $ruc = trim($_POST['ruc'] ?? '');
 
     if (empty($name) || empty($email) || empty($password)) {
         $response['message'] = 'Por favor, rellena los campos obligatorios.';
